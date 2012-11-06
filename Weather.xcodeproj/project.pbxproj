@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		835A33061649B79B009860D3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 835A33051649B79B009860D3 /* README.md */; };
 		83DADB411649A1E6008A10E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DADB401649A1E6008A10E1 /* UIKit.framework */; };
 		83DADB431649A1E6008A10E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DADB421649A1E6008A10E1 /* Foundation.framework */; };
 		83DADB451649A1E6008A10E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DADB441649A1E6008A10E1 /* CoreGraphics.framework */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		835A33051649B79B009860D3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		83DADB3C1649A1E6008A10E1 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DADB401649A1E6008A10E1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		83DADB421649A1E6008A10E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,6 +61,7 @@
 		83DADB311649A1E6008A10E1 = {
 			isa = PBXGroup;
 			children = (
+				835A33051649B79B009860D3 /* README.md */,
 				83DADB461649A1E6008A10E1 /* Weather */,
 				83DADB3F1649A1E6008A10E1 /* Frameworks */,
 				83DADB3D1649A1E6008A10E1 /* Products */,
@@ -167,6 +170,7 @@
 				83DADB551649A1E6008A10E1 /* Default@2x.png in Resources */,
 				83DADB571649A1E6008A10E1 /* Default-568h@2x.png in Resources */,
 				83DADB5A1649A1E6008A10E1 /* MainStoryboard.storyboard in Resources */,
+				835A33061649B79B009860D3 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +300,7 @@
 				83DADB621649A1E6008A10E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
