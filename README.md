@@ -1,4 +1,4 @@
-# iOS Wunderground Barometer Test
+# iOS Wunderground Barometer Demonstration
 
 --
 
