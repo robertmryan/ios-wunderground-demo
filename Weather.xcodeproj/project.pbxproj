@@ -18,6 +18,7 @@
 		83DADB571649A1E6008A10E1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83DADB561649A1E6008A10E1 /* Default-568h@2x.png */; };
 		83DADB5A1649A1E6008A10E1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83DADB581649A1E6008A10E1 /* MainStoryboard.storyboard */; };
 		83DADB5D1649A1E6008A10E1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DADB5C1649A1E6008A10E1 /* ViewController.m */; };
+		83DADB6C1649A241008A10E1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DADB6B1649A241008A10E1 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		83DADB591649A1E6008A10E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		83DADB5B1649A1E6008A10E1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		83DADB5C1649A1E6008A10E1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		83DADB6B1649A241008A10E1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83DADB6C1649A241008A10E1 /* CoreLocation.framework in Frameworks */,
 				83DADB411649A1E6008A10E1 /* UIKit.framework in Frameworks */,
 				83DADB431649A1E6008A10E1 /* Foundation.framework in Frameworks */,
 				83DADB451649A1E6008A10E1 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +76,7 @@
 		83DADB3F1649A1E6008A10E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83DADB6B1649A241008A10E1 /* CoreLocation.framework */,
 				83DADB401649A1E6008A10E1 /* UIKit.framework */,
 				83DADB421649A1E6008A10E1 /* Foundation.framework */,
 				83DADB441649A1E6008A10E1 /* CoreGraphics.framework */,

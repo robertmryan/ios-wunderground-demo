@@ -1,18 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2519" systemVersion="12A206j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1856"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Barometer:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYc-Ep-FTq">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Loading weather information" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="9rj-T3-m4o">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="144" id="sau-cK-I68"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJ8-2g-REi">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="zJ1-Or-E3X"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="mb" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1b-W5-4oK">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cYc-Ep-FTq" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="9gj-CL-8ub"/>
+                            <constraint firstItem="cYc-Ep-FTq" firstAttribute="top" secondItem="9rj-T3-m4o" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="DrK-vY-sGE"/>
+                            <constraint firstItem="9rj-T3-m4o" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Iuh-1F-3Zl"/>
+                            <constraint firstItem="9rj-T3-m4o" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="R7g-tF-cTY"/>
+                            <constraint firstItem="dJ8-2g-REi" firstAttribute="leading" secondItem="cYc-Ep-FTq" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="XlO-t0-yjg"/>
+                            <constraint firstItem="dJ8-2g-REi" firstAttribute="baseline" secondItem="cYc-Ep-FTq" secondAttribute="baseline" type="default" id="bvu-zT-xwN"/>
+                            <constraint firstItem="dJ8-2g-REi" firstAttribute="baseline" secondItem="F1b-W5-4oK" secondAttribute="baseline" type="default" id="eml-hG-o0s"/>
+                            <constraint firstItem="F1b-W5-4oK" firstAttribute="leading" secondItem="dJ8-2g-REi" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="gJ3-Fe-At5"/>
+                            <constraint firstAttribute="trailing" secondItem="9rj-T3-m4o" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="hYp-Nu-pEt"/>
+                            <constraint firstItem="dJ8-2g-REi" firstAttribute="top" secondItem="9rj-T3-m4o" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="uPu-N6-B2p"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pressureMbLabel" destination="dJ8-2g-REi" id="xXx-HX-sgl"/>
+                        <outlet property="statusLabel" destination="9rj-T3-m4o" id="Jlg-la-wVl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
