@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
-// You should replace the string below with the "key id" you get from http://www.wunderground.com/weather/api/
+#warning Replace following value for kWundergroundKey with value of "key id" you get from http://www.wunderground.com/weather/api/
 
 const NSString *kWundergroundKey = @"dxxxxxxxxxxxxxxx";
 
