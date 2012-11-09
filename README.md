@@ -11,7 +11,7 @@ On Stack Overflow a user asked [how to receive atmospheric pressure from a weath
 
 So, this project illustrates an example of how this might be done. This particular demonstration is retrieving data in JSON format from www.wunderground.com (a sample weather API referenced to in the [The Weather Channel's services](http://www.weather.com/services/) page). But the basic structure would be similar when retrieving weather information from other services, too (though the details of how the URL is constructed, how the JSON is parsed, etc., will vary, obviously).
 
-Note, this assumes that you have a Wunderground "key id" for your app by visiting http://www.wunderground.com/weather/api/?ref=twc
+Note, this assumes that you have a Wunderground "key id" for your app by visiting http://www.wunderground.com/weather/api/?ref=1dbe6fe9188f1163
 
 --
 
