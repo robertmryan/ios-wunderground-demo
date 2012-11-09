@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pressureMbLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tempCLabel;
 
 @end

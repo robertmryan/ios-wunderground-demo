@@ -38,24 +38,48 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Temperature:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIG-4s-sA8">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGy-mx-fSb">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="c" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqH-eS-OsV">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="EIG-4s-sA8" firstAttribute="top" secondItem="cYc-Ep-FTq" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="6ey-OK-5nM"/>
+                            <constraint firstItem="PqH-eS-OsV" firstAttribute="leading" secondItem="rGy-mx-fSb" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="9VZ-mV-04v"/>
                             <constraint firstItem="cYc-Ep-FTq" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="9gj-CL-8ub"/>
                             <constraint firstItem="cYc-Ep-FTq" firstAttribute="top" secondItem="9rj-T3-m4o" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="DrK-vY-sGE"/>
+                            <constraint firstItem="PqH-eS-OsV" firstAttribute="leading" secondItem="F1b-W5-4oK" secondAttribute="leading" type="default" id="Egm-6h-9jv"/>
                             <constraint firstItem="9rj-T3-m4o" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="Iuh-1F-3Zl"/>
+                            <constraint firstItem="EIG-4s-sA8" firstAttribute="baseline" secondItem="rGy-mx-fSb" secondAttribute="baseline" type="default" id="J6b-XE-Pae"/>
                             <constraint firstItem="9rj-T3-m4o" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="R7g-tF-cTY"/>
-                            <constraint firstItem="dJ8-2g-REi" firstAttribute="leading" secondItem="cYc-Ep-FTq" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="XlO-t0-yjg"/>
+                            <constraint firstItem="rGy-mx-fSb" firstAttribute="top" secondItem="dJ8-2g-REi" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="USx-iq-BWe"/>
+                            <constraint firstItem="rGy-mx-fSb" firstAttribute="leading" secondItem="dJ8-2g-REi" secondAttribute="leading" type="default" id="bIN-ua-VGa"/>
                             <constraint firstItem="dJ8-2g-REi" firstAttribute="baseline" secondItem="cYc-Ep-FTq" secondAttribute="baseline" type="default" id="bvu-zT-xwN"/>
                             <constraint firstItem="dJ8-2g-REi" firstAttribute="baseline" secondItem="F1b-W5-4oK" secondAttribute="baseline" type="default" id="eml-hG-o0s"/>
+                            <constraint firstItem="EIG-4s-sA8" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fbw-Lg-lF9"/>
                             <constraint firstItem="F1b-W5-4oK" firstAttribute="leading" secondItem="dJ8-2g-REi" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="gJ3-Fe-At5"/>
                             <constraint firstAttribute="trailing" secondItem="9rj-T3-m4o" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="hYp-Nu-pEt"/>
+                            <constraint firstItem="PqH-eS-OsV" firstAttribute="baseline" secondItem="rGy-mx-fSb" secondAttribute="baseline" type="default" id="sqb-02-QjB"/>
+                            <constraint firstItem="rGy-mx-fSb" firstAttribute="leading" secondItem="EIG-4s-sA8" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="tgD-CA-R84"/>
                             <constraint firstItem="dJ8-2g-REi" firstAttribute="top" secondItem="9rj-T3-m4o" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="uPu-N6-B2p"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="pressureMbLabel" destination="dJ8-2g-REi" id="xXx-HX-sgl"/>
                         <outlet property="statusLabel" destination="9rj-T3-m4o" id="Jlg-la-wVl"/>
+                        <outlet property="tempCLabel" destination="rGy-mx-fSb" id="dwv-OT-Tuc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>

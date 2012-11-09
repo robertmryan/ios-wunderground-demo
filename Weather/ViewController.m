@@ -225,6 +225,18 @@ const NSString *kWundergroundKey = @"dxxxxxxxxxxxxxxx";
         statusMessage = @"No barometric information found";
     }
     
+    NSNumber *tempC      = currentObservation[@"temp_c"];
+
+    if (tempC)
+    {
+        statusMessage = @"Retrieved temperature";
+        self.tempCLabel.text = [tempC stringValue];
+    }
+    else
+    {
+        statusMessage = @"No temperature information found";
+    }
+    
     // update the user interface status message
     
     [self updateStatusMessage:statusMessage stopActivityIndicator:YES stopLocationServices:YES logMessage:weatherResults];
