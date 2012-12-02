@@ -13,7 +13,7 @@
 
 const NSString *kWundergroundKey = @"dxxxxxxxxxxxxxxx";
 
-@interface ViewController () <CLLocationManagerDelegate>
+@interface ViewController () <CLLocationManagerDelegate, UITextFieldDelegate>
 {
     CLLocationManager *locationManager;
     UIActivityIndicatorView *activityIndicator;
@@ -27,6 +27,8 @@ const NSString *kWundergroundKey = @"dxxxxxxxxxxxxxxx";
     [super viewDidLoad];
     
     self.statusLabel.text = @"Determining location";
+    
+    [self hideZipCode:YES animate:NO];
     
     // show spinning activity indicator while load of location/weather information is in progress
     
@@ -126,12 +128,67 @@ const NSString *kWundergroundKey = @"dxxxxxxxxxxxxxxx";
 {
     CLLocation* location = [locations lastObject];
     
+    [self retrieveWeatherForLocation:location orZipCode:nil];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [self hideZipCode:NO animate:YES];
+
+    // handle location errors here, such as case where user doesn't let app use iphone's location
+    
+    [self updateStatusMessage:@"Unable to determine location. You must enable location services for this app in Settings. Or just enter zip code."
+        stopActivityIndicator:YES
+         stopLocationServices:NO
+                   logMessage:error];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status != kCLAuthorizationStatusAuthorized)
+    {
+        [self updateStatusMessage:@"You must authorize this app to determine location of device for this app in Settings."
+            stopActivityIndicator:YES
+             stopLocationServices:NO
+                       logMessage:@(status)];
+    }
+    
+    if (status == kCLAuthorizationStatusDenied)
+    {
+        [self hideZipCode:NO animate:YES];
+    }
+}
+
+#pragma mark - Methods for retrieving weather from Wunderground
+
+- (void)retrieveWeatherForLocation:(CLLocation *)location orZipCode:(NSString *)zipCode
+{
+    NSString *urlString;
+    
     // get URL for current conditions
     
-    NSString *urlString = [NSString stringWithFormat:@"http://api.wunderground.com/api/%@/conditions/q/%+f,%+f.json",
-                           kWundergroundKey,
-                           location.coordinate.latitude,
-                           location.coordinate.longitude];
+    if (location)
+    {
+        // based upon longitude and latitude returned by CLLocationManager
+        
+        urlString = [NSString stringWithFormat:@"http://api.wunderground.com/api/%@/conditions/q/%+f,%+f.json",
+                     kWundergroundKey,
+                     location.coordinate.latitude,
+                     location.coordinate.longitude];
+    }
+    else if ([zipCode length] == 5)
+    {
+        // based upon the zip code
+        
+        urlString = [NSString stringWithFormat:@"http://api.wunderground.com/api/%@/conditions/q/%@.json",
+                     kWundergroundKey,
+                     zipCode];
+        
+    }
+    else
+    {
+        NSAssert(NO, @"You must provide a CLLocation object or five digit zip code");
+    }
     
     // Log it so you can see what the URL was for diagnostic purposes.
     // It's often useful to pull this up in a web browser like FireFox
@@ -189,7 +246,11 @@ const NSString *kWundergroundKey = @"dxxxxxxxxxxxxxxx";
     NSDictionary *errorDictionary = response[@"error"];
     if (errorDictionary != nil)
     {
-        [self updateStatusMessage:@"Error reported by weather service" stopActivityIndicator:YES stopLocationServices:YES logMessage:errorDictionary];
+        NSString *message = @"Error reported by weather service";
+        
+        if (errorDictionary[@"description"])
+            message = [NSString stringWithFormat:@"%@: %@", message, errorDictionary[@"description"]];
+        [self updateStatusMessage:message stopActivityIndicator:YES stopLocationServices:YES logMessage:errorDictionary];
         
         if ([errorDictionary[@"type"] isEqualToString:@"keynotfound"])
         {
@@ -226,7 +287,7 @@ const NSString *kWundergroundKey = @"dxxxxxxxxxxxxxxx";
     }
     
     NSNumber *tempC      = currentObservation[@"temp_c"];
-
+    
     if (tempC)
     {
         statusMessage = @"Retrieved temperature";
@@ -242,25 +303,118 @@ const NSString *kWundergroundKey = @"dxxxxxxxxxxxxxxx";
     [self updateStatusMessage:statusMessage stopActivityIndicator:YES stopLocationServices:YES logMessage:weatherResults];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    // handle location errors here, such as case where user doesn't let app use iphone's location
-    
-    [self updateStatusMessage:@"Unable to determine location. You must enable location services for this app in Settings."
-        stopActivityIndicator:YES
-         stopLocationServices:NO
-                   logMessage:error];
-}
+#pragma mark - Zip code field methods
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+// helper function to hide or show zip code fields
+
+- (void)hideZipCode:(BOOL)hide animate:(BOOL)animate
 {
-    if (status != kCLAuthorizationStatusAuthorized)
+    BOOL goButtonHidden = hide || [self.zipCodeTextField.text length] != 5;
+    
+    if (animate)
     {
-        [self updateStatusMessage:@"You must authorize this app to determine location of device for this app in Settings."
-            stopActivityIndicator:YES
-             stopLocationServices:NO
-                       logMessage:@(status)];
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.zipCodePromptLabel.alpha = hide ? 0.0 : 1.0;
+                             self.zipCodeTextField.alpha = hide ? 0.0 : 1.0;
+                             self.zipCodeGoButton.alpha = goButtonHidden ? 0.0 : 1.0;
+                         }];
+    }
+    else
+    {
+        self.zipCodePromptLabel.alpha = hide ? 0.0 : 1.0;
+        self.zipCodeTextField.alpha = hide ? 0.0 : 1.0;
+        self.zipCodeGoButton.alpha = goButtonHidden ? 0.0 : 1.0;
     }
 }
 
+// only allow numeric characters
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    BOOL shouldChange = NO;
+    NSString *newValue = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    BOOL goButtonHidden = (self.zipCodeGoButton.alpha < 0.5);
+    BOOL goButtonShouldHide;
+    
+    // first, let's see if there were any non-numeric characters
+    
+    NSCharacterSet *nonNumeric = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+    
+    if (([string rangeOfCharacterFromSet:nonNumeric].location == NSNotFound) && [newValue length] <= 5)
+    {
+        shouldChange = YES;
+        
+        // and while we're here, show the go button if the length is exactly five characters
+        
+        goButtonShouldHide = ([newValue length] != 5);
+        
+        if (goButtonHidden != goButtonShouldHide)
+        {
+            [UIView animateWithDuration:0.25
+                             animations:^{
+                                 self.zipCodeGoButton.alpha = goButtonShouldHide ? 0.0 : 1.0;
+                             }];
+
+            textField.returnKeyType = (goButtonShouldHide ? UIReturnKeyDone : UIReturnKeyGo);
+        }
+    }
+    
+    return shouldChange;
+}
+
+// don't return unless five characters
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    if ([textField.text length] == 5)
+    {
+        [self retrieveWeatherForLocation:nil orZipCode:textField.text];
+    }
+    
+    return YES;
+}
+
+// if we ended editing for any reason, dismiss the keyboard
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+
+    return YES;
+}
+
+// user tapped on zipcode "go" button
+
+- (IBAction)pressedZipCodeGoButton:(id)sender
+{
+    [self.zipCodeTextField resignFirstResponder];
+
+    if ([self.zipCodeTextField.text length] == 5)
+    {
+        [self retrieveWeatherForLocation:nil orZipCode:self.zipCodeTextField.text];
+    }
+    else
+    {
+        [[[UIAlertView alloc] initWithTitle:nil
+                                    message:@"Please enter five number zip code"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }
+}
+
+// detect touches anywhere on the screen, and if so, dismiss the keyboard
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.zipCodeTextField resignFirstResponder];
+}
 @end
